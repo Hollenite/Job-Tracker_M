@@ -1,7 +1,27 @@
-.application-card-conainter {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;  
+.applications-page {
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.applications-header {
+  margin-bottom: 24px;
+}
+
+.applications-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.applications-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.application-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }

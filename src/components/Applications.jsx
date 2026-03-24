@@ -110,7 +110,7 @@ function Applications() {
             company={job.title}
             role={job.category}
             appliedDate="15 Jan 2024"
-            status={updateStatus(job.id)}
+            status={job.status || updateStatus(job.id)}
             domain={job.brand + ".com"}
           />
         ))}

@@ -71,6 +71,7 @@ function Applications() {
         />
         {Jobs.map((job) => (
           <Card
+            key={job.id}
             company={job.title}
             role={job.category}
             appliedDate="15 Jan 2024"

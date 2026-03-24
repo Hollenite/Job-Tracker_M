@@ -5,19 +5,87 @@
 }
 
 .applications-header {
-  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 16px;
 }
 
-.applications-header h1 {
+.applications-title h1 {
   font-size: 24px;
   font-weight: 700;
   color: var(--text-dark);
 }
 
-.applications-header p {
+.applications-title p {
   font-size: 14px;
   color: var(--text-muted);
   margin-top: 4px;
+}
+
+.applications-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sort {
+  display: flex;
+  gap: 8px;
+}
+
+.sort button {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background: white;
+  color: var(--teal);
+  border: 1px solid var(--teal-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sort button:hover {
+  background: var(--teal-light);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.search input {
+  padding: 8px 14px;
+  font-size: 13px;
+  border: 1px solid var(--teal-border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  width: 200px;
+  transition: border-color 0.2s ease;
+}
+
+.search input:focus {
+  border-color: var(--teal);
+}
+
+.search button {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--teal);
+  color: white;
+  border: 1px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.search button:hover {
+  background: #0f766e;
 }
 
 .application-card-container {

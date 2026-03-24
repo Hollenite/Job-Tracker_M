@@ -1,4 +1,4 @@
-import './Card.css';
+import "./Card.css";
 
 function Card({ company, role, appliedDate, status, domain }) {
   return (
@@ -30,7 +30,9 @@ function Card({ company, role, appliedDate, status, domain }) {
       </div>
 
       <div className="card-footer">
-        <span className={`status-badge status-${status?.toLowerCase()}`}>
+        <span
+          className={`status-badge ${status ? `status-${status.toLowerCase()}` : ""}`}
+        >
           {status}
         </span>
         <div className="card-actions">

@@ -4,6 +4,38 @@ import { useEffect, useState } from "react";
 
 function Applications() {
   const [Jobs, setJobs] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    company: "",
+    role: "",
+    appliedDate: "",
+    status: "Applied",
+    domain: "",
+  });
+  function handleAddJob(e) {
+    e.preventDefault();
+    const newJob = {
+      id: Date.now(),
+      title: formData.company,
+      category: formData.role,
+      appliedDate: formData.appliedDate,
+      status: formData.status,
+      brand: formData.domain.replace(".com", ""),
+    };
+    setJobs((prev) => [...prev, newJob]);
+    setFormData({
+      company: "",
+      role: "",
+      appliedDate: "",
+      status: "Applied",
+      domain: "",
+    });
+    setShowModal(false);
+  }
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
 
   async function fetchJobs() {
     const data = await fetch("https://dummyjson.com/products/?limit=10");
@@ -44,6 +76,9 @@ function Applications() {
             <input type="text" placeholder="Search by company" />
             <button>Submit</button>
           </div>
+          <button className="add-job-btn" onClick={() => setShowModal(true)}>
+            + Add Job
+          </button>
         </div>
       </div>
 
@@ -80,6 +115,88 @@ function Applications() {
           />
         ))}
       </div>
+
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Add Job Application</h2>
+              <button
+                className="modal-close"
+                onClick={() => setShowModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={handleAddJob}>
+              <div className="form-group">
+                <label>Company Name</label>
+                <input
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder="e.g. Google"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Job Role</label>
+                <input
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  placeholder="e.g. Frontend Developer"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Company Domain</label>
+                <input
+                  name="domain"
+                  value={formData.domain}
+                  onChange={handleChange}
+                  placeholder="e.g. google.com"
+                />
+              </div>
+              <div className="form-group">
+                <label>Applied Date</label>
+                <input
+                  type="date"
+                  name="appliedDate"
+                  value={formData.appliedDate}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label>Status</label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value="Applied">Applied</option>
+                  <option value="Interviewing">Interviewing</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+              <div className="modal-actions">
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="submit-btn">
+                  Add Job
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

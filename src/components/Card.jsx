@@ -36,7 +36,7 @@ function Card({ company, role, appliedDate, status, domain }) {
           {status}
         </span>
         <div className="card-actions">
-          <button>Add</button>
+          <button>Edit</button>
           <button>Delete</button>
           <button>Pin</button>
         </div>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 function Applications() {
   const [Jobs, setJobs] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [sortMethod, setSortMethod] = useState(null); // 'date' or 'status'
   const [formData, setFormData] = useState({
     company: "",
     role: "",
@@ -58,6 +59,29 @@ function Applications() {
     else return "Rejected";
   }
 
+  function sortByDate() {
+    setSortMethod("date");
+    setJobs((prevJobs) => {
+      return [...prevJobs].sort((a, b) => {
+        const dateA = new Date(a.appliedDate || 0);
+        const dateB = new Date(b.appliedDate || 0);
+        return dateB - dateA;
+      });
+    });
+  }
+
+  function sortByStatus() {
+    setSortMethod("status");
+    const statusOrder = { Applied: 1, Interviewing: 2, Offer: 3, Rejected: 4 };
+    setJobs((prevJobs) => {
+      return [...prevJobs].sort((a, b) => {
+        const statusA = a.status || updateStatus(a.id);
+        const statusB = b.status || updateStatus(b.id);
+        return (statusOrder[statusA] || 0) - (statusOrder[statusB] || 0);
+      });
+    });
+  }
+
   return (
     <div className="applications-page">
       <div className="applications-header">
@@ -68,8 +92,18 @@ function Applications() {
 
         <div className="applications-actions">
           <div className="sort">
-            <button>Sort by Date</button>
-            <button>Sort by Status</button>
+            <button
+              className={sortMethod === "date" ? "active" : ""}
+              onClick={sortByDate}
+            >
+              Sort by Date
+            </button>
+            <button
+              className={sortMethod === "status" ? "active" : ""}
+              onClick={sortByStatus}
+            >
+              Sort by Status
+            </button>
           </div>
 
           <div className="search">

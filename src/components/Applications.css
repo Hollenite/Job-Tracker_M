@@ -51,6 +51,12 @@
   background: var(--teal-light);
 }
 
+.sort button.active {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+
 .search {
   display: flex;
   align-items: center;
